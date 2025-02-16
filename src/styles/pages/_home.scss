@@ -1,0 +1,11 @@
+.home {
+    margin-top: 70px;
+    .container {
+        width: 100%;
+        padding:  20px 15px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
