@@ -72,6 +72,7 @@ function ProductCard({ product, removeProduct }) {
 
       <Link to={`/product/${product.id}`} state={{ product }} className="product-card-img">
         <img src={product.thumbnail} alt={product.title} />
+      </Link>
         <div className="product-card-icon">
           <FontAwesomeIcon
             icon={like ? solidHeart : regularHeart}
@@ -80,8 +81,8 @@ function ProductCard({ product, removeProduct }) {
               cursor: "pointer",
               color: like ? "red" : "#585757",
               transition: "color 0.3s ease",
-              width: "20px",
-              height: "20px",
+              width: "25px",
+              height: "25px",
             }}
           />
           <FontAwesomeIcon
@@ -91,12 +92,11 @@ function ProductCard({ product, removeProduct }) {
               cursor: "pointer",
               color: compare ? "blue" : "#585757",
               transition: "color 0.3s ease",
-              width: "20px",
-              height: "20px",
+              width: "25px",
+              height: "25px",
             }}
           />
         </div>
-      </Link>
       <Link to={`/product/${product.id}`} state={{ product }} className="product-card-info">
         <p>{product.title}</p>
         <div className="stars">
