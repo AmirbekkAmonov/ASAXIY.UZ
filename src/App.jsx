@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Empty from '@/components/Empty';
 import Layout from '@/components/layout/Layout';
-import PraductDetail from '@/components/productDetail';
+import PraductDetail from '@/components/ProductDetail';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
 import Login from '@/pages/NavPage/Login';
