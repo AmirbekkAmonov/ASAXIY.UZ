@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Empty from '@/components/Empty';
-import Layout from '@/components/layout/layout';
+import Layout from '@/components/layout/Layout';
 import PraductDetail from '@/components/productDetail';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
