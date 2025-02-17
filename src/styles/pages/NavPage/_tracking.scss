@@ -39,7 +39,7 @@
     .tracking-content {
         width: 100%;
         margin: 0 auto;
-        height: 500px;
+        height: auto;
         border-radius: 20px;
         padding: 30px;
         background-color: #FFF;
@@ -50,6 +50,7 @@
         box-shadow: 0px 10px 30px rgba(209,213,223,.5);
 
         &-registration {
+            position: relative;
             width: 50%;
             display: flex;
             align-items: center;
@@ -66,6 +67,7 @@
             }
 
             b {
+                width: 80% ;
                 font-size: 16px;
                 font-weight: 400;
                 line-height: 24px;
@@ -88,22 +90,55 @@
                     text-transform: none;
                 }
             }
-            .text{
-                margin-top: 30px;
+            label {
+                margin-top: 20px;
+                width: 80% ;
                 display: flex;
-                align-items: center;
+                align-items: start;
                 flex-direction: column;
-                gap: 15px;
+                gap: 5px;
                 p {
-                    font-size: 10px;
-                    font-weight: 500;
-                    line-height: 20px;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 24px;
                     color: #475569;
                 }
+                input {
+                    width: 100% ;
+                    background-color: #f8fafc ;
+                    padding: 10px 16px ;
+                    border-radius: 8px ;
+                    font-size: 14px ;
+                    font-weight: 500;
+                    line-height: 24px;
+                    color: #000;
+                }
             }
+            .capcha {
+                width: 80%;
+                display: flex;
+                align-items: start;
+                justify-content: start;
+                margin-top: 20px;
+                margin-bottom: 80px;
+                .g-recaptcha {
+                  margin: 0 auto;
+                }
+              }
+              
+              .tracking-btn[disabled] {
+                background-color: #ccc;
+                cursor: not-allowed;
+              }
+              
             .tracking-btn {
+                position: absolute;
+                bottom: 0;
+                left: 10%;
                 margin-top: 10px;
-                width: 50%;
+                display: flex;
+                align-items: start;    
+                justify-content: start;
                 padding: 10px 16px;
                 border-radius: 10px;
                 font-size: 14px;
