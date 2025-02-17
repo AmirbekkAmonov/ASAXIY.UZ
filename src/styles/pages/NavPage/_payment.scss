@@ -1,10 +1,134 @@
 .payment {
     margin-top: 70px;
+
     .container {
         width: 100%;
-        padding:  20px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+
+    .payment-Links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        a {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: #858997;
+        }
+
+        span {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 20px;
+            color: #858997;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #000;
+        }
+    }
+
+    .payment-content {
+        width: 100%;
+        margin: 0 auto;
+        height: 500px;
+        border-radius: 20px;
+        padding: 30px;
+        background-color: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0px 10px 30px rgba(209,213,223,.5);
+
+        &-registration {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+
+            h2 {
+                color: #000;
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 32px;
+                text-align: center;
+            }
+
+            b {
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+                text-align: center;
+                color: #475569;
+            }
+
+            input {
+                width: 80% ;
+                background-color: #f8fafc ;
+                padding: 10px 16px ;
+                border-radius: 8px ;
+                font-size: 14px ;
+                font-weight: 500;
+                line-height: 24px;
+                color: #000;
+                text-transform: uppercase;
+
+                &::placeholder {
+                    text-transform: none;
+                }
+            }
+            .text{
+                margin-top: 30px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                gap: 15px;
+                p {
+                    font-size: 10px;
+                    font-weight: 500;
+                    line-height: 20px;
+                    color: #475569;
+                }
+            }
+            .payment-btn {
+                margin-top: 10px;
+                width: 50%;
+                padding: 10px 16px;
+                border-radius: 10px;
+                font-size: 14px;
+                background-color: #006bff;
+                color: #fff;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: #0414ff;
+                }
+            }
+        }
+
+        &-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            height: 100%;
+
+            img {
+                width: 70%;
+                height: auto;
+                object-fit: contain;
+            }
+        }
     }
 }
