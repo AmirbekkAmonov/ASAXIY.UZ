@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
-import API from "@/API";
+import axios from "axios";
 function Product({ search }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -17,7 +17,8 @@ function Product({ search }) {
   const [filters, setFilters] = useState({ name: "all", price: "all", rating: "all" });
 
   useEffect(() => {
-    API.get("/products")
+    axios
+      .get("https://dummyjson.com/products")
       .then((response) => {
         setProducts(response.data.products);
         setFilteredProducts(response.data.products); 
