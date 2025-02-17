@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "@/styles/main.scss";
-import axios from "axios";
 import ProductCard from "@/components/ProductCard";
 import SkeletonCard from "@/components/SkeletonCard";
 import { Link } from "react-router-dom";
@@ -11,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 // import API from "@/API/index";
-import axios, { Axios } from "axios";
+import axios from "axios";
 function Product({ search }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -23,14 +22,14 @@ function Product({ search }) {
       .get("https://dummyjson.com/products")
       .then((response) => {
         setProducts(response.data.products);
-        setFilteredProducts(response.data.products);
+        setFilteredProducts(response.data.products); 
         setLoading(false);
       })
       .catch((error) => {
         console.error("Xatolik yuz berdi: ", error);
         setLoading(false);
       });
-  }, []);
+  }, []); 
 
   useEffect(() => {
     let sortedProducts = [...products];
