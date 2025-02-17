@@ -69,11 +69,46 @@ function Product({ search }) {
     .slice(0, 10);
 
   const popularProducts = filteredProducts.slice(0, 20);
-  
+
 
   return (
     <section className="product">
       <Filter onFilterChange={setFilters} />
+      {/* CORUSEL */}
+      <div className="product-title">
+        <Link to={"/empty"} className="h2" style={{marginLeft: "10px"}}>
+         Super narx
+        </Link>
+        <Link to={"/empty"}>Barcha mahsulotlar</Link>
+      </div>
+      <div className="product-grid product-carousel">
+        <Swiper
+          slidesPerView={5}
+          spaceBetween={20}
+          loop={true}
+          navigation={{ nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }}
+          autoplay={{ delay: 1500, disableOnInteraction: false }}
+          modules={[Pagination, Navigation, Autoplay]}
+          className="mySwiper"
+          style={{ width: "98%", padding: "5px 15px", background: "#006bff", borderRadius: "10px" }} // Background qo‘shildi
+        >
+          {loading
+            ? [...Array(6)].map((_, index) => (
+              <SwiperSlide key={index}>
+                <SkeletonCard />
+              </SwiperSlide>
+            ))
+            : popularProducts.map((product) => (
+              <SwiperSlide key={product.id}>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+        <div className="custom-swiper-buttons">
+          <div className="swiper-button-prev"></div>
+          <div className="swiper-button-next"></div>
+        </div>
+      </div>
 
       {/* BESTSELLER */}
       <div className="product-title">
@@ -120,37 +155,7 @@ function Product({ search }) {
           : popularProducts.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
 
-      {/* CORUSEL */}
-      <div className="product-title">
-        <Link to={"/empty"} className="h2">
-          Corusel
-        </Link>
-        <Link to={"/empty"}>Barcha mahsulotlar</Link>
-      </div>
-      <div className="product-grid">
-      <Swiper
-          slidesPerView={5}
-          spaceBetween={20}
-          loop={true}
-          navigation={true}
-          autoplay={{ delay: 1500, disableOnInteraction: false }} 
-          modules={[Pagination, Navigation, Autoplay]} 
-          className="mySwiper"
-          style={{ width: "100%", padding: "0 15px" }}
-        >
-          {loading
-            ? [...Array(6)].map((_, index) => (
-                <SwiperSlide key={index}>
-                  <SkeletonCard />
-                </SwiperSlide>
-              ))
-            : popularProducts.map((product) => (
-                <SwiperSlide key={product.id}>
-                  <ProductCard product={product} />
-                </SwiperSlide>
-              ))}
-        </Swiper>
-      </div>
+      
 
     </section>
   );
