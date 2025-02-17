@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation"; 
 import { Pagination, Navigation, Autoplay } from "swiper/modules"; 
-import API from "@/API";
+import API from "@/API/index";
 function Product({ search }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -151,9 +151,6 @@ function Product({ search }) {
           ? [...Array(20)].map((_, index) => <SkeletonCard key={index} />)
           : popularProducts.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
-
-      
-
     </section>
   );
 }
