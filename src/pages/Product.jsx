@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "@/styles/main.scss";
 import ProductCard from "@/components/ProductCard";
 import SkeletonCard from "@/components/SkeletonCard";
@@ -8,10 +7,9 @@ import Filter from "@/components/Filter";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/navigation"; // Navigatsiya uchun kerak
-
-import { Pagination, Navigation, Autoplay } from "swiper/modules"; // Navigatsiya moduli import qilinadi
-
+import "swiper/css/navigation"; 
+import { Pagination, Navigation, Autoplay } from "swiper/modules"; 
+import API from "@/API";
 function Product({ search }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -19,8 +17,7 @@ function Product({ search }) {
   const [filters, setFilters] = useState({ name: "all", price: "all", rating: "all" });
 
   useEffect(() => {
-    axios
-      .get("https://dummyjson.com/products")
+    API.get("/products")
       .then((response) => {
         setProducts(response.data.products);
         setFilteredProducts(response.data.products);

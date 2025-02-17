@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import "@/styles/main.scss";
+import { Link } from "react-router-dom";
 
 function Comparison() {
   const [comparison, setComparison] = useState([]);
@@ -10,24 +11,37 @@ function Comparison() {
     setComparison(compareProducts);
   }, []);
 
-  // Mahsulotni o‘chirish funksiyasi
   const removeComparison = (id) => {
     const updatedComparison = comparison.filter((product) => product.id !== id);
     setComparison(updatedComparison);
     localStorage.setItem("comparison", JSON.stringify(updatedComparison));
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="comparison">
       <div className="container">
-      <h2>Taqqoslash</h2>
+      <div className='comparison-Links'>
+          <Link to='/'>Bosh sahifa</Link>
+          <span>&gt;</span>
+          <p>Taqqoslash</p>
+        </div>
       {comparison.length === 0 ? (
-        <p>Taqqoslash ro‘yxatiga hech qanday mahsulot qo‘shilmagan.</p>
+        <div className="comparison-empty">
+          <img src="/assets/images/campare_not_page.webp" alt="" />
+          <p>Hozirda sizda mahsulotlar mavjud emas.</p>
+          <Link to='/' className="btn">Mahsulot qo'shish</Link>
+        </div>
       ) : (
-        <div className="product-grid">
+        <div className="comparison-content">
+          <div className="comparison-grid">
           {comparison.map((product) => (
             <ProductCard key={product.id} product={product} removeProduct={removeComparison} />
           ))}
+        </div>
+        <Link to='/' className="btn"> Mahsulot qo'shish</Link>
         </div>
       )}
       </div>
