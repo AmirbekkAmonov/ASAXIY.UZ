@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
 import Header from "@/components/Header";
 import "@/styles/main.scss";
+import { Link } from "react-router-dom";
 
 function Favorite() {
   const [favorites, setFavorites] = useState([]);
@@ -35,18 +36,30 @@ function Favorite() {
 
       <section className="favorite">
         <div className="container">
-          <h2>Sevimlilar</h2>
+          <div className='favorite-Links'>
+            <Link to='/'>Bosh sahifa</Link>
+            <span>&gt;</span>
+            <p>Sevimlilar</p>
+          </div>
           {favorites.length === 0 ? (
-            <p>Sevimlilarga hech qanday mahsulot qo'shilmagan.</p>
+            <div className="favorite-empty">
+              <img src="/assets/images/heart-bubble.svg" alt="" />
+              <p>Sevimli mahsulotlar yo'q</p>
+              <span>Mahsulotdagi ❤️ belgisi bilan qo'shing️</span>
+              <Link to='/' className="btn">Mahsulot qo'shish</Link>
+            </div>
           ) : (
-            <div className="product-grid">
-              {favorites.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  product={product}
-                  removeProduct={() => removeFavorite(product.id)}
-                />
-              ))}
+            <div className="favorite-content">
+              <div className="favorite-grid">
+                {favorites.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    removeProduct={() => removeFavorite(product.id)}
+                  />
+                ))}
+              </div>
+              <Link to='/' className="btn"> Mahsulot qo'shish</Link>
             </div>
           )}
         </div>
