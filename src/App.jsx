@@ -5,7 +5,6 @@ import Layout from '@/components/layout/Layout';
 import PraductDetail from '@/components/ProductDetail';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
-import Login from '@/pages/NavPage/Login';
 import Department from '@/pages/NavPage/Department';
 import Comparison from '@/pages/NavPage/Comparison';
 import Payment from '@/pages/NavPage/Payment';
@@ -16,10 +15,11 @@ import Favorite from './pages/NavPage/Favorite';
 
 function App() {
   const [search, setSearch] = useState("");
+  const [modal, setModal] = useState(false)
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout setSearch={setSearch} />}>
+        <Route path="/" element={<Layout setSearch={setSearch} setModal={setModal} modal={modal}/>}>
           <Route path="/" element={<Home search={search} />} />
           <Route path="/department" element={<Department />} />
           <Route path="/comparison" element={<Comparison />} />
@@ -31,7 +31,6 @@ function App() {
           <Route path='/product/:id' element={<PraductDetail />} />
           <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path='/login' element={<Login />} />
       </Routes>
     </>
 

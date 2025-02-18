@@ -1,0 +1,28 @@
+.input-phone {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+
+    p {
+        text-align: start;
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: 500;
+        color: #999a9e;
+    }
+    input {
+        display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 4px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #5f5f5f;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 2px solid #c2c6d1;
+    border-radius: 8px;
+    }
+}

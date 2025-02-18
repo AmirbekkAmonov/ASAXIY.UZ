@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import "@/styles/main.scss";
+import ModalWrapper from "./ModalWrapper";
+import InputPhone from "./InputPhone/InputPhone";
 
-function Header({ setSearch }) {
-  
+function Header({ setSearch, setModal, modal }) {
+
   const location = useLocation();
   const [favoriteCount, setFavoriteCount] = useState(0);
   const [icon, setIcon] = useState("/assets/icons/tracker.svg");
@@ -26,11 +28,7 @@ function Header({ setSearch }) {
       window.removeEventListener("storage", updateFavoriteCount);
     };
   }, []);
-
   const toggleLanguage = () => setLanguage((prev) => (prev === "ru" ? "uz" : "ru"));
-
-
-
   return (
     <header>
       <div className="container">
@@ -142,13 +140,13 @@ function Header({ setSearch }) {
           </button>
         </NavLink>
         <Link className="btn">
-        <button className="btn" onClick={toggleLanguage}>
-          <img src={`/assets/icons/language-${language}.svg`} alt="language" />
-          {language === "ru" ? "Русский" : "O'zbekcha"}
-        </button>
+          <button className="btn" onClick={toggleLanguage}>
+            <img src={`/assets/icons/language-${language}.svg`} alt="language" />
+            {language === "ru" ? "Русский" : "O'zbekcha"}
+          </button>
         </Link>
-        <Link to={"/login"} className="btn">
-          <button>
+        <div className="btn">
+          <button onClick={() => setModal(true)}>
             <svg
               className="icon"
               xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +163,31 @@ function Header({ setSearch }) {
             </svg>
             Kirish
           </button>
-        </Link>
+        </div>
+        {modal && (
+          <ModalWrapper onClose={() => setModal(false)} >
+            <div className="login-modal"> 
+              <div className="login-register">
+                  <h1>Kirish yoki shaxsiy kabinet yaratish</h1>
+                  <InputPhone />
+                  <button className="login-btn">Faollashtirish kodini oling</button>
+                  <div className="login-line">
+                    <span></span>
+                    <p>Yoki</p>
+                    <span></span>
+                  </div>
+                  <div className="login-social">
+                    <Link to={ `https://www.facebook.com/uz/site/auth?authclient=facebook`} target="_blank"><img src="/assets/icons/google.svg" alt="" /></Link>
+                    <Link to={ `https://www.facebook.com/uz/site/auth?authclient=facebook`} target="_blank"><img src="/assets/icons/facebook.svg" alt="" /></Link>
+                  </div>
+              </div>
+              <div className="login-text">
+                <h1>Lorem ipsum dolor sit amet.</h1>
+              </div>
+            </div>
+            <button onClick={() => setModal(false)} className="modal-close-btn"><img src="/assets/icons/close_icon.svg" alt="" /></button>
+          </ModalWrapper>
+        )}
       </div>
     </header>
   );

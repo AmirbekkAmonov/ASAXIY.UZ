@@ -27,6 +27,7 @@ header {
         align-items: center;
         justify-content: space-between;
         max-width: 610px;
+
         .menu-btn {
             display: flex;
             align-items: center;
@@ -87,12 +88,14 @@ header {
             }
         }
     }
+
     .btn {
         width: 85px;
         padding: 0 10px;
         display: flex;
         align-items: center;
         justify-content: center;
+
         button {
             position: relative;
             display: flex;
@@ -125,21 +128,132 @@ header {
                 width: 20px;
                 height: 20px;
             }
+
             svg {
                 fill: currentColor;
                 width: 20px;
                 height: 20px;
             }
         }
+
         &:hover {
             button {
                 color: #006bff;
             }
         }
+
         &.active {
             button {
                 color: #006bff;
             }
+        }
+    }
+
+    .login-modal {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .login-register {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: start;
+            flex-direction: column;
+            gap: 5px;
+            padding: 52px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+
+            h1 {
+                text-align: center;
+                margin-bottom: 40px;
+                font-size: 22px;
+                font-weight: 700;
+                color: #0f172a;
+                line-height: 32px;
+            }
+            .login-btn {
+                margin-top: 20px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                padding: 12px 20px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #fff;
+                border-radius: 10px;
+                background-color: #006bff;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: #0414ff;
+                }
+            }
+            .login-line {
+                margin: 20px 0;
+                width: 95%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                span {
+                    width: 100%;
+                    height: 1px;
+                    background-color: #c2c6d1;
+                }
+                p {
+                    font-size: 13px;
+                    color: #212529;
+                }
+            }
+            .login-social {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+                margin: 20px 0;
+
+                a {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+                    background-color: #f2f2f7;
+                    padding: 10px 47px;
+                    border-radius: 8px;
+                    color: #fff;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background-color:   #e7e7ec ;
+                    }
+                }
+            }
+        }
+
+        .login-text {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            padding: 52px 32px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            background-color: #f2f2f7;
+            border-radius: 0 15px 15px 0;
         }
     }
 }
