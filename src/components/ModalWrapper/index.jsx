@@ -3,9 +3,9 @@ import './style.scss';
 
 function ModalWrapper({ children, onClose }) {
   useEffect(() => {
-    document.body.style.overflow = "hidden"; // Modal ochilganda scrollni o'chirish
+    document.body.style.overflow = "hidden"; 
     return () => {
-      document.body.style.overflow = "auto"; // Modal yopilganda scrollni tiklash
+      document.body.style.overflow = "auto"; 
     };
   }, []);
 
