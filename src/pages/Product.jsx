@@ -88,7 +88,7 @@ function Product({ search }) {
           autoplay={{ delay: 1500, disableOnInteraction: false }}
           modules={[Pagination, Navigation, Autoplay]}
           className="mySwiper"
-          style={{ width: "98%", padding: "5px 15px", background: "#006bff", borderRadius: "10px" }} // Background qo‘shildi
+          style={{ width: "98%", padding: "5px 15px", background: "#006bff", borderRadius: "10px" }} 
         >
           {loading
             ? [...Array(6)].map((_, index) => (
