@@ -177,12 +177,39 @@ function Header({ setSearch, setModal, modal }) {
                     <span></span>
                   </div>
                   <div className="login-social">
-                    <Link to={ `https://www.facebook.com/uz/site/auth?authclient=facebook`} target="_blank"><img src="/assets/icons/google.svg" alt="" /></Link>
-                    <Link to={ `https://www.facebook.com/uz/site/auth?authclient=facebook`} target="_blank"><img src="/assets/icons/facebook.svg" alt="" /></Link>
+                    <Link to={ `https://www.facebook.com/uz/site/auth?authclient=facebook`} target="_blank"><img src="/assets/icons/search.png" alt="" /></Link>
+                    <Link to={ `https://www.facebook.com/uz/site/auth?authclient=facebook`} target="_blank"><img src="/assets/icons/facebook.png" alt="" /></Link>
                   </div>
               </div>
               <div className="login-text">
-                <h1>Lorem ipsum dolor sit amet.</h1>
+                <div className="login-text-card">
+                    <img src="/assets/icons/market.svg" alt="" />
+                    <div className="login-text-card-text">
+                      <h2>Endi bozorga borishga hojat yo'q</h2>
+                      <p>Bizda qulay narxlar va uyga yetkazib berish mavjud</p>
+                    </div>
+                </div>
+                <div className="login-text-card">
+                    <img src="/assets/icons/fast-delivery.svg" alt="" />
+                    <div className="login-text-card-text">
+                      <h2>Tez yetkazib berish</h2>
+                      <p>Bizning xizmatimiz sizni ajablantiradi</p>
+                    </div>
+                </div>
+                <div className="login-text-card">
+                    <img src="/assets/icons/return.svg" alt="" />
+                    <div className="login-text-card-text">
+                      <h2>Siz uchun qulayliklar</h2>
+                      <p>Nosozlik yuzaga kelganda tez rasmiylashtirish va qaytarish kafolati</p>
+                    </div>
+                </div>
+                <div className="login-text-card">
+                    <img src="/assets/icons/card.svg" alt="" />
+                    <div className="login-text-card-text">
+                      <h2>Bo'lib to'lash</h2>
+                      <p>Oldindan to'lov yo'q</p>
+                    </div>
+                </div>
               </div>
             </div>
             <button onClick={() => setModal(false)} className="modal-close-btn"><img src="/assets/icons/close_icon.svg" alt="" /></button>
