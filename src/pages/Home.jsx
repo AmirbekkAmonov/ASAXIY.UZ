@@ -1,9 +1,5 @@
-
 import '@/styles/main.scss'
 import Product from './Product'
-
-
-
 function Home({ search  }) {
   
   return (
