@@ -6,6 +6,7 @@ import {
   faCartShopping,
   faStar,
   faXmark,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
@@ -15,6 +16,7 @@ import { Link } from "react-router-dom";
 function ProductCard({ product, removeProduct }) {
   const [like, setLike] = useState(false);
   const [compare, setCompare] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const favoriteProducts = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -66,37 +68,47 @@ function ProductCard({ product, removeProduct }) {
     <div className="product-card">
       {removeProduct && (
         <button onClick={handleRemove} className="delete-icon">
-           <FontAwesomeIcon  icon={faXmark} />
+          <FontAwesomeIcon icon={faXmark} />
         </button>
       )}
 
       <Link to={`/product/${product.id}`} state={{ product }} className="product-card-img">
-        <img src={product.thumbnail} alt={product.title} />
+        {!imageLoaded && (
+          <div className="loading-spinner">
+            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+          </div>
+        )}
+        <img
+          src={product.thumbnail}
+          alt={product.title}
+          onLoad={() => setImageLoaded(true)}
+          style={{ display: imageLoaded ? "block" : "none" }}
+        />
       </Link>
-        <div className="product-card-icon">
-          <FontAwesomeIcon
-            icon={like ? solidHeart : regularHeart}
-            onClick={toggleFavorite}
-            style={{
-              cursor: "pointer",
-              color: like ? "red" : "#585757",
-              transition: "color 0.3s ease",
-              width: "25px",
-              height: "25px",
-            }}
-          />
-          <FontAwesomeIcon
-            icon={faScaleBalanced}
-            onClick={toggleComparison}
-            style={{
-              cursor: "pointer",
-              color: compare ? "blue" : "#585757",
-              transition: "color 0.3s ease",
-              width: "25px",
-              height: "25px",
-            }}
-          />
-        </div>
+      <div className="product-card-icon">
+        <FontAwesomeIcon
+          icon={like ? solidHeart : regularHeart}
+          onClick={toggleFavorite}
+          style={{
+            cursor: "pointer",
+            color: like ? "red" : "#585757",
+            transition: "color 0.3s ease",
+            width: "25px",
+            height: "25px",
+          }}
+        />
+        <FontAwesomeIcon
+          icon={faScaleBalanced}
+          onClick={toggleComparison}
+          style={{
+            cursor: "pointer",
+            color: compare ? "blue" : "#585757",
+            transition: "color 0.3s ease",
+            width: "25px",
+            height: "25px",
+          }}
+        />
+      </div>
       <Link to={`/product/${product.id}`} state={{ product }} className="product-card-info">
         <p>{product.title}</p>
         <div className="stars">
