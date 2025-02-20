@@ -20,14 +20,14 @@ function Product({ search }) {
     API.get('/products')
       .then((response) => {
         setProducts(response.data.products);
-        setFilteredProducts(response.data.products); 
+        setFilteredProducts(response.data.products);
         setLoading(false);
       })
       .catch((error) => {
         console.error("Xatolik yuz berdi: ", error);
         setLoading(false);
       });
-  }, []); 
+  }, []);
 
   useEffect(() => {
     let sortedProducts = [...products];
@@ -57,7 +57,7 @@ function Product({ search }) {
     .filter((product) =>
       search ? product.title.toLowerCase().includes(search.toLowerCase()) : true
     )
-    .sort(() => Math.random() - 0.5)
+    .sort((a, b) => b.rating - a.rating)
     .slice(0, 10);
 
 
@@ -66,7 +66,6 @@ function Product({ search }) {
     .slice(0, 10);
 
   const popularProducts = filteredProducts.slice(0, 20);
-
 
   return (
     <section className="product">
@@ -87,7 +86,7 @@ function Product({ search }) {
           autoplay={{ delay: 1500, disableOnInteraction: false }}
           modules={[Pagination, Navigation, Autoplay]}
           className="mySwiper"
-          style={{ width: "98%", padding: "5px 15px", background: "#006bff", borderRadius: "10px" }} 
+          style={{ width: "98%", padding: "5px 15px", background: "#006bff", borderRadius: "10px" }}
         >
           {loading
             ? [...Array(6)].map((_, index) => (

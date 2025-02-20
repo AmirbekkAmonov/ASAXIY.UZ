@@ -1,31 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ProductCard from "@/components/ProductCard";
 import Header from "@/components/Header";
 import "@/styles/main.scss";
 import { Link } from "react-router-dom";
+import { UseStateValue } from "@/context";
 
 function Favorite() {
-  const [favorites, setFavorites] = useState([]);
+  const { favorites, toggleFavorite } = UseStateValue();
 
-  useEffect(() => {
-    const loadFavorites = () => {
-      const favoriteProducts = JSON.parse(localStorage.getItem("favorites")) || [];
-      setFavorites(favoriteProducts);
-    };
-
-    loadFavorites();
-
-    window.addEventListener("storage", loadFavorites);
-    return () => window.removeEventListener("storage", loadFavorites);
-  }, []);
-
-  const removeFavorite = (id) => {
-    const updatedFavorites = favorites.filter((product) => product.id !== id);
-    setFavorites(updatedFavorites);
-    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-
-    window.dispatchEvent(new Event("storage"));
-  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -33,7 +15,6 @@ function Favorite() {
   return (
     <>
       <Header favoriteCount={favorites.length} />
-
       <section className="favorite">
         <div className="container">
           <div className='favorite-Links'>
@@ -41,11 +22,12 @@ function Favorite() {
             <span>&gt;</span>
             <p>Sevimlilar</p>
           </div>
+
           {favorites.length === 0 ? (
             <div className="favorite-empty">
               <img src="/assets/images/heart-bubble.svg" alt="" />
               <p>Sevimli mahsulotlar yo'q</p>
-              <span>Mahsulotdagi ❤️ belgisi bilan qo'shing️</span>
+              <span>Mahsulotdagi ❤️ belgisi bilan qo'shing</span>
               <Link to='/' className="btn">Mahsulot qo'shish</Link>
             </div>
           ) : (
@@ -55,7 +37,7 @@ function Favorite() {
                   <ProductCard
                     key={product.id}
                     product={product}
-                    removeProduct={() => removeFavorite(product.id)}
+                    removeProduct={() => toggleFavorite(product)}
                   />
                 ))}
               </div>
