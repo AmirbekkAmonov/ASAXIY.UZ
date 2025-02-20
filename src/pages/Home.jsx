@@ -1,6 +1,6 @@
 import '@/styles/main.scss'
 import Product from './Product'
-function Home({ search  }) {
+function Home({ search }) {
   
   return (
     <section className='home'>
