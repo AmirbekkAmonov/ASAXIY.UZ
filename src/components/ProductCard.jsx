@@ -75,7 +75,7 @@ function ProductCard({ product, removeProduct }) {
       <Link to={`/product/${product.id}`} state={{ product }} className="product-card-img">
         {!imageLoaded && (
           <div className="loading-spinner">
-            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+            <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "54px", color: "#ccc" }} />
           </div>
         )}
         <img

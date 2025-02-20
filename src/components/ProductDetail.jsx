@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '@/styles/main.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faScaleBalanced, faShareNodes, faThumbsUp, faCircleInfo, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faScaleBalanced, faShareNodes, faThumbsUp, faSpinner, faStar } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
@@ -13,7 +13,7 @@ function ProductDetail() {
   const [compare, setCompare] = useState(false);
   const location = useLocation();
   const product = location.state?.product;
-
+  const [imageLoaded, setImageLoaded] = useState(false);
   if (!product) return <p>Mahsulot topilmadi!</p>;
 
   const toggleFavorite = () => setLike((prev) => !prev);
@@ -35,20 +35,70 @@ function ProductDetail() {
           <div className='product-about-title'>
             <div className='product-about-title-corusel'>
               <div className='about-corusel'>
-                <img src={product.images[0]} alt='Mahsulot rasmi' />
+                {!imageLoaded && (
+                  <div className="loading-spinner">
+                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+                  </div>
+                )}
+                <img
+                  src={product.images[0]}
+                  alt='Mahsulot rasmi'
+                  onLoad={() => setImageLoaded(true)}
+                  style={{ display: imageLoaded ? "block" : "none" }}
+                />
               </div>
               <div className='about-corusel'>
-                <img src={product.images[0]} alt='Mahsulot rasmi' />
+                {!imageLoaded && (
+                  <div className="loading-spinner">
+                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+                  </div>
+                )}
+                <img
+                  src={product.images[0]}
+                  alt='Mahsulot rasmi'
+                  onLoad={() => setImageLoaded(true)}
+                  style={{ display: imageLoaded ? "block" : "none" }}
+                />
               </div>
               <div className='about-corusel'>
-                <img src={product.images[0]} alt='Mahsulot rasmi' />
+                {!imageLoaded && (
+                  <div className="loading-spinner">
+                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+                  </div>
+                )}
+                <img
+                  src={product.images[0]}
+                  alt='Mahsulot rasmi'
+                  onLoad={() => setImageLoaded(true)}
+                  style={{ display: imageLoaded ? "block" : "none" }}
+                />
               </div>
               <div className='about-corusel'>
-                <img src={product.images[0]} alt='Mahsulot rasmi' />
+                {!imageLoaded && (
+                  <div className="loading-spinner">
+                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+                  </div>
+                )}
+                <img
+                  src={product.images[0]}
+                  alt='Mahsulot rasmi'
+                  onLoad={() => setImageLoaded(true)}
+                  style={{ display: imageLoaded ? "block" : "none" }}
+                />
               </div>
             </div>
             <div className='product-about-title-img'>
-              <img src={product.thumbnail} alt='Mahsulot rasmi' />
+              {!imageLoaded && (
+                <div className="loading-spinner">
+                  <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "54px", color: "#ccc" }} />
+                </div>
+              )}
+              <img
+                src={product.thumbnail}
+                alt='Mahsulot rasmi'
+                onLoad={() => setImageLoaded(true)}
+                style={{ display: imageLoaded ? "block" : "none" }}
+              />
               <div className='product-about-icon'>
                 <FontAwesomeIcon
                   icon={like ? solidHeart : regularHeart}
