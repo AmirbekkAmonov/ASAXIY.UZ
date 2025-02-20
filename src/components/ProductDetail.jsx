@@ -2,26 +2,26 @@ import React, { useEffect, useState } from 'react';
 import '@/styles/main.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faScaleBalanced, faShareNodes, faThumbsUp, faSpinner, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faScaleBalanced, faShareNodes, faThumbsUp, faSpinner, faStar, faCartShopping, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import InstallmentPlan from './InstallmentPlan';
+import { UseStateValue } from '@/context';
 
 function ProductDetail() {
-  const [like, setLike] = useState(false);
-  const [compare, setCompare] = useState(false);
+  const { favorites, toggleFavorite, comparison, toggleComparison, cart, toggleCart } = UseStateValue();
   const location = useLocation();
   const product = location.state?.product;
   const [imageLoaded, setImageLoaded] = useState(false);
-  if (!product) return <p>Mahsulot topilmadi!</p>;
-
-  const toggleFavorite = () => setLike((prev) => !prev);
-  const toggleComparison = () => setCompare((prev) => !prev);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (!product) return <p>Mahsulot topilmadi!</p>;
+
+  const isInCart = cart.some((item) => item.id === product.id);
 
   return (
     <section className='product-about'>
@@ -34,58 +34,21 @@ function ProductDetail() {
         <div className='about-content'>
           <div className='product-about-title'>
             <div className='product-about-title-corusel'>
-              <div className='about-corusel'>
-                {!imageLoaded && (
-                  <div className="loading-spinner">
-                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
-                  </div>
-                )}
-                <img
-                  src={product.images[0]}
-                  alt='Mahsulot rasmi'
-                  onLoad={() => setImageLoaded(true)}
-                  style={{ display: imageLoaded ? "block" : "none" }}
-                />
-              </div>
-              <div className='about-corusel'>
-                {!imageLoaded && (
-                  <div className="loading-spinner">
-                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
-                  </div>
-                )}
-                <img
-                  src={product.images[0]}
-                  alt='Mahsulot rasmi'
-                  onLoad={() => setImageLoaded(true)}
-                  style={{ display: imageLoaded ? "block" : "none" }}
-                />
-              </div>
-              <div className='about-corusel'>
-                {!imageLoaded && (
-                  <div className="loading-spinner">
-                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
-                  </div>
-                )}
-                <img
-                  src={product.images[0]}
-                  alt='Mahsulot rasmi'
-                  onLoad={() => setImageLoaded(true)}
-                  style={{ display: imageLoaded ? "block" : "none" }}
-                />
-              </div>
-              <div className='about-corusel'>
-                {!imageLoaded && (
-                  <div className="loading-spinner">
-                    <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
-                  </div>
-                )}
-                <img
-                  src={product.images[0]}
-                  alt='Mahsulot rasmi'
-                  onLoad={() => setImageLoaded(true)}
-                  style={{ display: imageLoaded ? "block" : "none" }}
-                />
-              </div>
+              {[...Array(4)].map((_, index) => (
+                <div className='about-corusel' key={index}>
+                  {!imageLoaded && (
+                    <div className="loading-spinner">
+                      <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "24px", color: "#ccc" }} />
+                    </div>
+                  )}
+                  <img
+                    src={product.images[0]}
+                    alt='Mahsulot rasmi'
+                    onLoad={() => setImageLoaded(true)}
+                    style={{ display: imageLoaded ? "block" : "none" }}
+                  />
+                </div>
+              ))}
             </div>
             <div className='product-about-title-img'>
               {!imageLoaded && (
@@ -101,12 +64,12 @@ function ProductDetail() {
               />
               <div className='product-about-icon'>
                 <FontAwesomeIcon
-                  icon={like ? solidHeart : regularHeart}
-                  onClick={toggleFavorite}
+                  icon={favorites.some((fav) => fav.id === product.id) ? solidHeart : regularHeart}
+                  onClick={() => toggleFavorite(product)}
                   className='product-about-icon-like'
                   style={{
                     cursor: 'pointer',
-                    color: like ? 'red' : 'blue',
+                    color: favorites.some((fav) => fav.id === product.id) ? 'red' : '#585757',
                     transition: 'color 0.3s ease',
                     width: '20px',
                     height: '20px',
@@ -114,11 +77,11 @@ function ProductDetail() {
                 />
                 <FontAwesomeIcon
                   icon={faScaleBalanced}
-                  onClick={toggleComparison}
+                  onClick={() => toggleComparison(product)}
                   className='product-about-icon-compare'
                   style={{
                     cursor: 'pointer',
-                    color: compare ? 'blue' : '#585757',
+                    color: comparison.some((comp) => comp.id === product.id) ? 'blue' : '#585757',
                     transition: 'color 0.3s ease',
                     width: '20px',
                     height: '20px',
@@ -136,17 +99,14 @@ function ProductDetail() {
                         key={i}
                         icon={i < Math.round(product.rating) ? faStar : faStarRegular}
                         style={{
-                          color: i < Math.round(product.rating) ? "#FFC107" : "#FFC107",
+                          color: "#FFC107",
                           marginRight: "5px",
                           fontSize: "20px"
                         }}
                       />
                     ))}
-
                   </span>
-
                   <p>{Array.isArray(product.reviews) && product.reviews.length > 0 ? `${product.reviews.length} ta sharh` : "Sharhlar yo‘q"}</p>
-
                 </div>
                 <button className='reyting-btn'>
                   <FontAwesomeIcon icon={faShareNodes} style={{ color: '##006bff' }} />
@@ -176,9 +136,16 @@ function ProductDetail() {
                 </div>
               </div>
               <div className='product-about-title-text-btn'>
-                <button className='about-cart'>
-                  <img src="/assets/icons/cart-white.svg" alt="" />
-                  <span>Savatchaga qo'shish</span>
+                <button
+                  className='about-cart'
+                  style={{ backgroundColor: isInCart ? "red" : "#00bfaf"}} 
+                  onClick={() => toggleCart(product)}
+                >
+                  <FontAwesomeIcon
+                    icon={isInCart ? faTrash : faCartShopping} 
+                    style={{ color: "#FFFFFF", fontSize: "20px" }}
+                  />
+                  <span>{isInCart ? "Savatchadan o'chirish" : "Savatchaga qo'shish"}</span>
                 </button>
                 <button className='about-order'>Hoziroq xarid qilish</button>
               </div>
@@ -191,7 +158,6 @@ function ProductDetail() {
             </div>
           </div>
           <InstallmentPlan product={product} />
-
         </div>
       </div>
     </section>

@@ -7,40 +7,38 @@ function Provider({ children }) {
     const [modal, setModal] = useState(false);
     const [favorites, setFavorites] = useState([]);
     const [comparison, setComparison] = useState([]);
+    const [cart, setCart] = useState([]); // 🛒 Savatcha holati
 
     useEffect(() => {
-        const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-        setFavorites(savedFavorites);
-
-        const savedComparison = JSON.parse(localStorage.getItem("comparison")) || [];
-        setComparison(savedComparison);
+        setFavorites(JSON.parse(localStorage.getItem("favorites")) || []);
+        setComparison(JSON.parse(localStorage.getItem("comparison")) || []);
+        setCart(JSON.parse(localStorage.getItem("cart")) || []); // 🛒 Savatchani yuklash
     }, []);
 
     const toggleFavorite = (product) => {
-        let updatedFavorites;
-        if (favorites.some((fav) => fav.id === product.id)) {
-            updatedFavorites = favorites.filter((fav) => fav.id !== product.id);
-        } else {
-            updatedFavorites = [...favorites, product];
-        }
+        let updatedFavorites = favorites.some((fav) => fav.id === product.id)
+            ? favorites.filter((fav) => fav.id !== product.id)
+            : [...favorites, product];
         setFavorites(updatedFavorites);
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
     };
 
     const toggleComparison = (product) => {
-        let updatedComparison;
-        if (comparison.some((comp) => comp.id === product.id)) {
-            updatedComparison = comparison.filter((comp) => comp.id !== product.id);
-        } else {
-            updatedComparison = [...comparison, product];
-        }
+        let updatedComparison = comparison.some((comp) => comp.id === product.id)
+            ? comparison.filter((comp) => comp.id !== product.id)
+            : [...comparison, product];
         setComparison(updatedComparison);
         localStorage.setItem("comparison", JSON.stringify(updatedComparison));
     };
-    useEffect(() => {
-        localStorage.setItem("comparison", JSON.stringify(comparison));
-    }, [comparison]);
 
+    const toggleCart = (product) => {
+        let updatedCart = cart.some((item) => item.id === product.id)
+            ? cart.filter((item) => item.id !== product.id) // Agar mahsulot allaqachon bor bo‘lsa, uni o‘chiramiz
+            : [...cart, { ...product, quantity: 1 }]; // Yangi mahsulot qo‘shamiz
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    };
+    
 
     return (
         <Context.Provider
@@ -53,6 +51,8 @@ function Provider({ children }) {
                 toggleFavorite,
                 comparison,
                 toggleComparison,
+                cart,
+                toggleCart, 
             }}
         >
             {children}

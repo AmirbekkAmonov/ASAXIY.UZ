@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "@/styles/main.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faScaleBalanced, faCartShopping, faStar, faXmark, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faScaleBalanced, faCartShopping, faStar, faXmark, faSpinner, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
@@ -9,11 +9,12 @@ import { Link } from "react-router-dom";
 import { UseStateValue } from "@/context";
 
 function ProductCard({ product, removeProduct }) {
-  const { favorites, toggleFavorite, comparison, toggleComparison } = UseStateValue();
+  const { favorites, toggleFavorite, comparison, toggleComparison, cart, toggleCart } = UseStateValue();
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const isLiked = favorites.some((fav) => fav.id === product.id);
   const isCompared = comparison.some((comp) => comp.id === product.id);
+  const isInCart = cart.some((item) => item.id === product.id);
 
   return (
     <div className="product-card">
@@ -90,9 +91,13 @@ function ProductCard({ product, removeProduct }) {
       </Link>
       <div className="product-card-btn">
         <button className="buy">Hoziroq harid qilish</button>
-        <button className="add">
+        <button
+          className={`add ${isInCart ? 'in-cart' : ''}`}
+          onClick={() => toggleCart(product)}
+          style={{ backgroundColor: isInCart ? "red" : "#00bfaf" }}
+        >
           <FontAwesomeIcon
-            icon={faCartShopping}
+            icon={isInCart ? faTrash : faCartShopping}
             style={{ color: "#FFFFFF", width: "24px", height: "24px" }}
           />
         </button>

@@ -10,8 +10,13 @@ function Header({ setSearch, setModal, modal }) {
   const location = useLocation();
   const [icon, setIcon] = useState("/assets/icons/tracker.svg");
   const [language, setLanguage] = useState("ru");
-  const { favorites } = UseStateValue();
+  const { favorites, cart } = UseStateValue();
   const [favoriteCount, setFavoriteCount] = useState(favorites.length);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    setCartCount(cart.length);
+  }, [cart]);
 
   useEffect(() => {
     setFavoriteCount(favorites.length);
@@ -100,7 +105,7 @@ function Header({ setSearch, setModal, modal }) {
           </button>
         </NavLink>
         <NavLink to={"/basket"} className="btn">
-          <button>
+          <button className="basket-btn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 192.36 197.2"
@@ -112,7 +117,7 @@ function Header({ setSearch, setModal, modal }) {
               <circle cx="57.52" cy="180.76" r="16.43" />
               <circle cx="139.68" cy="180.76" r="16.43" />
             </svg>
-            <span className="count">0</span>
+            <span className="count">{cartCount}</span>
             Savatcha
           </button>
         </NavLink>
