@@ -2,12 +2,14 @@ import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import { Outlet } from 'react-router-dom';
+import { UseStateValue } from '@/context';
 
 
-function Layout({ setSearch, setModal, modal }) {
+function Layout() {
+  const data = UseStateValue()
   return (
     <>
-      <Header setSearch={setSearch} setModal={setModal} modal={modal} />
+      <Header {...data}/>
       <Outlet />
       <Footer />
     </>
