@@ -7,12 +7,12 @@ function Provider({ children }) {
     const [modal, setModal] = useState(false);
     const [favorites, setFavorites] = useState([]);
     const [comparison, setComparison] = useState([]);
-    const [cart, setCart] = useState([]); // 🛒 Savatcha holati
+    const [cart, setCart] = useState([]);
 
     useEffect(() => {
         setFavorites(JSON.parse(localStorage.getItem("favorites")) || []);
         setComparison(JSON.parse(localStorage.getItem("comparison")) || []);
-        setCart(JSON.parse(localStorage.getItem("cart")) || []); // 🛒 Savatchani yuklash
+        setCart(JSON.parse(localStorage.getItem("cart")) || []);
     }, []);
 
     const toggleFavorite = (product) => {
@@ -33,8 +33,8 @@ function Provider({ children }) {
 
     const toggleCart = (product) => {
         let updatedCart = cart.some((item) => item.id === product.id)
-            ? cart.filter((item) => item.id !== product.id) // Agar mahsulot allaqachon bor bo‘lsa, uni o‘chiramiz
-            : [...cart, { ...product, quantity: 1 }]; // Yangi mahsulot qo‘shamiz
+            ? cart.filter((item) => item.id !== product.id) 
+            : [...cart, { ...product, quantity: 1 }];
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     };

@@ -12,7 +12,7 @@ function Filter({ onFilterChange }) {
     const { name, value } = e.target;
     const newFilters = { ...filters, [name]: value };
     setFilters(newFilters);
-    onFilterChange(newFilters); // Parent componentga filterni jo'natish
+    onFilterChange(newFilters); 
   };
 
   const clearFilters = () => {
@@ -25,7 +25,7 @@ function Filter({ onFilterChange }) {
     <div className="filter">
       <div className="filter-content">
         <div className="filter-item">
-          <p>Nomi bo‘yicha</p>
+          <p>Nomi bo'yicha</p>
           <select name="name" value={filters.name} onChange={handleChange}>
             <option value="all">Barchasi</option>
             <option value="a-z">A - Z gacha</option>
@@ -33,7 +33,7 @@ function Filter({ onFilterChange }) {
           </select>
         </div>
         <div className="filter-item">
-          <p>Narxi bo‘yicha</p>
+          <p>Narxi bo'yicha</p>
           <select name="price" value={filters.price} onChange={handleChange}>
             <option value="all">Barchasi</option>
             <option value="low-high">Eng arzoni</option>
@@ -41,10 +41,10 @@ function Filter({ onFilterChange }) {
           </select>
         </div>
         <div className="filter-item">
-          <p>Reyting bo‘yicha</p>
+          <p>Reyting bo'yicha</p>
           <select name="rating" value={filters.rating} onChange={handleChange}>
             <option value="all">Barchasi</option>
-            <option value="asc">O‘sish tartibida</option>
+            <option value="asc">O'sish tartibida</option>
             <option value="desc">Kamayish tartibida</option>
           </select>
         </div>

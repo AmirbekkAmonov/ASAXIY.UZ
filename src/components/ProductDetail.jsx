@@ -118,12 +118,12 @@ function ProductDetail() {
                 <div className='bmh'>
                   <p>Brend:</p>
                   <div className='line'></div>
-                  <span className='brend-name'>{product.brand || 'Noma’lum'}</span>
+                  <span className='brend-name'>{product.brand || "Noma'lum"}</span>
                 </div>
                 <div className='bmh'>
                   <p>Model:</p>
                   <div className='line'></div>
-                  <span className='brend-model'>{product.sku || 'Noma’lum'}</span>
+                  <span className='brend-model'>{product.sku || "Noma'lum"}</span>
                 </div>
                 <div className='bmh'>
                   <p>Holati:</p>
@@ -138,11 +138,11 @@ function ProductDetail() {
               <div className='product-about-title-text-btn'>
                 <button
                   className='about-cart'
-                  style={{ backgroundColor: isInCart ? "red" : "#00bfaf"}} 
+                  style={{ backgroundColor: isInCart ? "red" : "#00bfaf" }}
                   onClick={() => toggleCart(product)}
                 >
                   <FontAwesomeIcon
-                    icon={isInCart ? faTrash : faCartShopping} 
+                    icon={isInCart ? faTrash : faCartShopping}
                     style={{ color: "#FFFFFF", fontSize: "20px" }}
                   />
                   <span>{isInCart ? "Savatchadan o'chirish" : "Savatchaga qo'shish"}</span>
