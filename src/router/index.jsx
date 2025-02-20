@@ -8,7 +8,7 @@ import Payment from '@/pages/NavPage/Payment'
 import Tracking from '@/pages/NavPage/Tracking'
 import NotFound from '@/pages/NotFound'
 import Home from '@/pages/Home'
-import Layout from '@/components/Layout/Layout'
+import Layout from '@/components/layout/Layout'
 import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Context } from '@/context'; 
