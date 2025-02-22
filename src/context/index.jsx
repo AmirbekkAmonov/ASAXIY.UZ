@@ -45,9 +45,9 @@ function Provider({ children }) {
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     };
 
-    const updateCartQuantity = (productId, newQuantity) => {
+    const updateCartQuantity = (id, newQuantity) => {
         let updatedCart = cart.map((item) =>
-            item.id === productId ? { ...item, quantity: Math.max(1, newQuantity) } : item
+            item.id === id ? { ...item, quantity: newQuantity } : item
         );
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
