@@ -28,10 +28,20 @@ function Basket() {
             <Link to='/' className="btn">Asosiy menyu</Link>
           </div>
         ) : (
+          <div className='basket-content'>
           <div className="basket-list">
             {cart.map((product) => (
-              <ProductCard key={product.id} product={product} removeProduct={removeFromCart} />
+              <ProductCard key={product.id} product={product} removeProduct={removeFromCart} isBasket={true}/>
             ))}
+          </div>
+            <div className='basket-total'>
+              <div className='basket-total-img'>
+                <p>Savatdagi mahsulotlar soni: {cart.length} </p>
+                <img src="/assets/icons/discount_cart.svg" alt="" />
+              </div>
+              <p>Umumiy summa:</p>
+              <span>{cart.reduce((total, item) => total + item.price, 0)} so'm</span>
+            </div>
           </div>
         )}
       </div>

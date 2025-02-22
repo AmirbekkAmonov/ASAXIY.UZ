@@ -32,13 +32,34 @@ function Provider({ children }) {
     };
 
     const toggleCart = (product) => {
-        let updatedCart = cart.some((item) => item.id === product.id)
-            ? cart.filter((item) => item.id !== product.id) 
-            : [...cart, { ...product, quantity: 1 }];
+        let updatedCart;
+        if (cart.some((item) => item.id === product.id)) {
+            updatedCart = cart.map((item) =>
+                item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            );
+        } else {
+            updatedCart = [...cart, { ...product, quantity: 1 }];
+        }
+
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    };
+
+    const updateCartQuantity = (productId, newQuantity) => {
+        let updatedCart = cart.map((item) =>
+            item.id === productId ? { ...item, quantity: Math.max(1, newQuantity) } : item
+        );
+        setCart(updatedCart);
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+    };
+
+    const removeFromCart = (id) => {
+        let updatedCart = cart.filter((item) => item.id !== id);
         setCart(updatedCart);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
     };
     
+
 
     return (
         <Context.Provider
@@ -52,7 +73,9 @@ function Provider({ children }) {
                 comparison,
                 toggleComparison,
                 cart,
-                toggleCart, 
+                toggleCart,
+                updateCartQuantity,
+                removeFromCart,
             }}
         >
             {children}

@@ -1,12 +1,14 @@
 .basket {
     margin-top: 70px;
+
     .container {
         width: 100%;
-        padding:  20px;
+        padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
     }
+
     .basket-Links {
         display: flex;
         align-items: center;
@@ -33,6 +35,7 @@
             color: #000;
         }
     }
+
     .basket-empty {
         margin-top: 40px;
         margin: 20px 0;
@@ -47,6 +50,7 @@
             width: 295px;
             height: 295px;
         }
+
         p {
             font-size: 22px;
             font-weight: 500;
@@ -54,6 +58,7 @@
             color: #000;
         }
     }
+
     .btn {
         text-align: center;
         width: max-content;
@@ -71,10 +76,252 @@
             background-color: #3300ff;
         }
     }
+
+    .basket-content {
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
     .basket-list {
-       width: 100%;
-       display: grid;
-       grid-template-columns: repeat(5, 1fr);
-       gap: 20px;
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #fff;
+        padding: 10px 30px;
+        border-radius: 15px;
+
+
+        .basket-card {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: space-between;
+            gap: 15px;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 0px;
+            border-bottom: 1px solid #e5e7eb;
+
+
+            .basket-info {
+                width: 100%;
+                padding: 20px 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+
+                img {
+                    width: 124px;
+                    height: 124px;
+                }
+
+                .loading-spinner {
+                    margin: 40px;
+                    width: 44px;
+                    height: 44px;
+                }
+
+                .basket-text {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+
+                    .product-name {
+                        width: 30%;
+                        display: flex;
+                        align-items: start;
+                        justify-content: start;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        a {
+                            font-size: 16px;
+                            line-height: 24px;
+                            font-weight: 500;
+                            color: #000;
+                            line-height: 22px;
+                        }
+
+                        .basket-button {
+                            font-size: 12px;
+                            line-height: 20px;
+                            font-weight: 500;
+                            padding: 4px 8px;
+                            border-radius: 10px;
+                            color: #ffffff;
+                            background-color: #008DFF;
+                        }
+                    }
+
+                    .counter {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 15px;
+
+                        button {
+                            width: 30px;
+                            height: 30px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            border: 1px solid #006bff;
+                            color: #000;
+                        }
+
+                        span {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 44px;
+                            height: 28px;
+                            text-align: center;
+                            font-size: 16px;
+                            line-height: 20px;
+                            font-weight: 500;
+                            color: #000;
+                            background-color: #fff;
+                            border: none;
+                            outline: 0;
+                        }
+
+                        .disabled-btn {
+                            border: 1px solid #ccc;
+                            color: #ccc;
+                            cursor: not-allowed;
+                        }
+                    }
+
+                    .basket-text2 {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        .price {
+                            display: flex;
+                            flex-direction: column;
+
+                            .old {
+                                font-size: 12px;
+                                line-height: 20px;
+                                color: #c2c6d1;
+                                text-decoration: line-through;
+                            }
+
+                            .new {
+                                font-size: 18px;
+                                font-weight: 700;
+                                color: #006bff;
+                            }
+                        }
+
+                        .to-pay {
+                            text-align: start;
+                            font-size: 14px;
+                            line-height: 20px;
+                            font-weight: 500;
+                            padding: 4px;
+                            border: 1px solid #fe7300;
+                            border-radius: 5px;
+                            color: #fe7300;
+                            background-color: transparent;
+
+                        }
+                    }
+
+                    .basket-icon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 20px;
+
+                        .delete-icon {
+                            color: #cbd5e1;
+                            transition: all 0.3s ease;
+
+                            &:hover {
+                                color: red;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .product-card-btn {
+                display: none;
+            }
+        }
+    }
+
+    .basket-total {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: #fff;
+        padding: 30px 25px;
+        border-radius: 15px;
+
+        &-img {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            p {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 20px;
+                color: #fe7300;
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+            }
+        }
+
+        .total {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            p {
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 500;
+                color: #000;
+            }
+
+            span {
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 500;
+                color: #000;
+            }
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            border-radius: 10px;
+            background-color: #0414ff;
+        }
     }
 }
