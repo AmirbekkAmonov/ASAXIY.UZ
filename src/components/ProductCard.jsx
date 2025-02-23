@@ -8,7 +8,7 @@ import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { UseStateValue } from "@/context";
 
-function ProductCard({ product, isBasket }) {
+function ProductCard({ product, isBasket, isOrder }) {
   const { favorites, toggleFavorite, comparison, toggleComparison, cart, toggleCart, updateCartQuantity, removeFromCart } = UseStateValue();
   const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -18,17 +18,18 @@ function ProductCard({ product, isBasket }) {
 
   return (
     <div className={`product-card ${isBasket ? "basket-card" : ""}`}>
+
       {isBasket ? (
         <>
           <div className="basket-info">
             <Link to={`/product/${product.id}`} state={{ product }}>
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              className="basket-img"
-              onLoad={() => setImageLoaded(true)}
-              style={{ display: imageLoaded ? "block" : "none" }}
-            />
+              <img
+                src={product.thumbnail}
+                alt={product.title}
+                className="basket-img"
+                onLoad={() => setImageLoaded(true)}
+                style={{ display: imageLoaded ? "block" : "none" }}
+              />
             </Link>
             {!imageLoaded && <FontAwesomeIcon icon={faSpinner} spin className="loading-spinner" />}
             <div className="basket-text">
@@ -38,10 +39,10 @@ function ProductCard({ product, isBasket }) {
               </div>
               <div className="counter">
                 <button
-                className={product.quantity === 1 ? "disabled-btn" : ""}
-                 disabled={product.quantity === 1} 
-                 onClick={() => updateCartQuantity(product.id, product.quantity - 1)}
-                 >-</button>
+                  className={product.quantity === 1 ? "disabled-btn" : ""}
+                  disabled={product.quantity === 1}
+                  onClick={() => updateCartQuantity(product.id, product.quantity - 1)}
+                >-</button>
                 <span>{product.quantity}</span>
                 <button onClick={() => updateCartQuantity(product.id, product.quantity + 1)}>+</button>
               </div>
@@ -80,6 +81,33 @@ function ProductCard({ product, isBasket }) {
             </div>
           </div>
         </>
+      ) : isOrder ? (
+        <div className="order-card">
+          <Link to={`/product/${product.id}`} state={{ product }} className="order-card-img">
+            <img
+              src={product.thumbnail}
+              alt={product.title}
+              className="order-img"
+            />
+          </Link>
+          <div className="order-text">
+            <b>{product.title}</b>
+            <div className="order-text2">
+              <span className="order-quantity">{product.quantity} Dona</span>
+              <p className="order-price">
+                {(product.price * 13000).toLocaleString()} so'm
+              </p>
+            </div>
+            <div className="order-icon" onClick={() => removeFromCart(product.id)}>
+              <FontAwesomeIcon
+                icon={faTrash}
+                style={{ width: "20px", height: "20px", cursor: "pointer", }}
+                className="delete-icon"
+              />
+              <p>O'chirish</p>
+            </div>
+          </div>
+        </div>
       ) : (
         <>
           <div className="asosiy-card">
@@ -156,7 +184,7 @@ function ProductCard({ product, isBasket }) {
                 style={{ backgroundColor: "#00bfaf" }}
               >
                 <FontAwesomeIcon
-                  icon={ faCartShopping}
+                  icon={faCartShopping}
                   style={{ color: "#FFFFFF", width: "24px", height: "24px" }}
                 />
               </button>

@@ -5,7 +5,7 @@ import { UseStateValue } from '@/context';
 import ProductCard from '@/components/ProductCard';
 
 function Basket() {
-  const { cart, removeFromCart, updateCartQuantity } = UseStateValue();
+  const { cart, removeFromCart } = UseStateValue();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,8 +47,10 @@ function Basket() {
                   </div>
                 </div>
               </div>
-              <p>Umumiy qiymat:</p>
-              <span >{cart.reduce((total, item) => total + item.price * item.quantity * 13000, 0).toLocaleString()} so'm</span>
+              <div className='basket-total-price'>
+                <p>Umumiy qiymat:</p>
+                <span >{cart.reduce((total, item) => total + item.price * item.quantity * 13000, 0).toLocaleString()} so'm</span>
+              </div>
               <span className='span'></span>
               <Link to='/order' className='btn'>Buyurtma berish</Link>
             </div>

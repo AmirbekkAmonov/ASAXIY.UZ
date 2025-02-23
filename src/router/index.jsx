@@ -9,6 +9,7 @@ import Tracking from '@/pages/NavPage/Tracking'
 import NotFound from '@/pages/NotFound'
 import Home from '@/pages/Home'
 import Layout from '@/components/layout/Layout'
+import Order from '@/components/Order'
 import React, { useContext } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Context } from '@/context';
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/favorite" element={<Favorite />} />
         <Route path='/empty' element={<Empty />} />
         <Route path='/product/:id' element={<ProductDetail />} />
+        <Route path='/order' element={<Order />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
