@@ -4,9 +4,12 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import '@/styles/main.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCreditCard, faWallet,faUser } from "@fortawesome/free-solid-svg-icons";
 import { UseStateValue } from '@/context';
 import ProductCard from './ProductCard';
+import YandexMap from './YandexMap';
+import { useNavigate } from 'react-router-dom';
+import Modal from './OrderModal';
 
 const regions = {
     toshkent: ["Chilonzor", "Yunusobod", "Shayxontohur"],
@@ -16,13 +19,16 @@ const regions = {
     navoiy: ["Zarafshon", "Nurota", "Karmana"]
 };
 function Order() {
-
     const { cart, removeFromCart } = UseStateValue();
-    const { control, handleSubmit, register, formState: { errors }, setValue, watch } = useForm();
+    const { control, handleSubmit, register, formState: { errors }, setValue, watch, reset } = useForm();
     const [districts, setDistricts] = useState([]);
     const [activeIndex, setActiveIndex] = useState(0);
+    const [priceCard, setPriceCard] = useState(0);
     const selectedRegion = watch("region");
     const selectedDistrict = watch("district");
+    const [deliveryPrice2, setDeliveryPrice2] = useState(null);
+    const navigete = useNavigate();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
 
     const handleRegionChange = (e) => {
@@ -34,6 +40,8 @@ function Order() {
 
     const onSubmit = (data) => {
         console.log('Form ma\'lumotlari:', data);
+        setIsModalOpen(true);
+        reset();
     };
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -41,6 +49,10 @@ function Order() {
 
     const handleClick = (index) => {
         setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+    };
+
+    const handlePrice = (index) => {
+        setPriceCard((prevIndex) => (prevIndex === index ? null : index));
     };
 
     const [deliveryPrice, setDeliveryPrice] = useState("Yetkazib berish narxi hisoblanmaydi");
@@ -53,7 +65,7 @@ function Order() {
         }
     }, [selectedRegion, selectedDistrict, activeIndex]);
 
-    const [deliveryPrice2, setDeliveryPrice2] = useState(null);
+
 
     useEffect(() => {
         if (selectedRegion && selectedDistrict) {
@@ -207,6 +219,30 @@ function Order() {
                                 {...register("promo")}
                             ></input>
                         </div>
+                        <div className='order-card-to'>
+                            <h2>To`lov usuli</h2>
+                            <div className={`order-card-to-content ${priceCard === 0 ? "active" : ""}`} onClick={() => handlePrice(0)}>
+                                <FontAwesomeIcon icon={faCreditCard} />
+                                <h3>Karta orqali onlayn to'lov (UzCard, Humo, Visa, MasterCard)</h3>
+                            </div>
+                            <div className={`order-card-to-content ${priceCard === 1 ? "active" : ""}`} onClick={() => handlePrice(1)}>
+                                <FontAwesomeIcon icon={faWallet} />
+                                <h3>Mahsulotni olganda (naqd)</h3>
+                            </div>
+                            <div className={`order-card-to-content ${priceCard === 2 ? "active" : ""}`} onClick={() => handlePrice(2)}>
+                                <FontAwesomeIcon icon={faUser} />
+                                <h3>Hisob raqam orqali to'lash</h3>
+                            </div>
+                        </div>
+                        <YandexMap />
+                        <form>
+                            <input type="checkbox" name="checkbox" id="checkbox" {...register("checkbox")} />
+                            <label htmlFor="checkbox">Men tovarlarni sotib olish shartlariga roziman</label>
+                        </form>
+                        <div className='order-button'>
+                            <button type='submit'>Buyurtma qilish</button>
+                            <button onClick={() => navigete(-1)}>Orqaga</button>
+                        </div>
                     </div>
                     <div className='order-content-to'>
                         <p className='p'>Savatdagi mahsulotlar soni: {cart.length} </p>
@@ -234,6 +270,10 @@ function Order() {
                     </div>
                 </form>
             </div>
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Buyurtma qabul qilindi">
+                <p>Sizning buyurtmangiz qabul qilindi va tez orada operator siz bilan bog‘lanadi.</p>
+                <button onClick={() => setIsModalOpen(false)}>Yopish</button>
+            </Modal>
         </div>
     );
 }

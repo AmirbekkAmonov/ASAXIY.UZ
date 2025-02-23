@@ -112,6 +112,111 @@
                     }
                 }
             }
+
+            .order-card-to {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+                justify-content: start;
+                gap: 20px;
+
+                &-content {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    gap: 10px;
+                    padding: 24px;
+                    border: 1px solid rgba(0, 0, 0, 0);
+                    border-radius: 16px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: #0f172a;
+                    line-height: 24px;
+                    cursor: pointer;
+                    background-color: #f2f2f7;
+                    transition: all 0.3s ease-in-out;
+                    &.active {
+                        border: 1px solid #006bff;
+                        background-color: #fff;
+                    }
+                }
+            }
+            form {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: start;
+                gap: 5px;
+                input[type="checkbox"] {
+                    appearance: none;
+                    width: 16px;
+                    height: 16px;
+                    border: 1px solid #fe7300;
+                    border-radius: 4px;
+                    position: relative;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                  
+                    &:checked {
+                      background-color: #fe7300;
+                      border-color: #fe7300;
+                    }
+                  
+                    &:checked::after {
+                      content: "✔";
+                      color: #ffffff;
+                      font-size: 14px;
+                      position: absolute;
+                      border: none;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                    }
+                  }
+                  label {
+                    font-size: 16px;
+                    line-height: 16px;
+                    font-weight: 500;
+                    color: #141821;
+                    cursor: pointer;
+                  }
+            }
+            .order-button {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: start;
+                gap: 20px;
+
+                button {
+                    padding: 10px 20px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 24px;
+                    color: #fff;
+                    border-radius: 10px;
+                    background-color: #ff8826;
+                    border: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease-in-out;
+                    &:nth-child(2) {
+                        background-color: #fff;
+                        color: #ff8826;
+                        border: 1px solid #ff8826;
+
+                        &:hover {
+                            background-color: #ececec;
+                            color: #ff7300;
+                        }
+                    }
+                    &:hover {
+                        background-color: #ff7300;
+                    }
+                }
+            }
         }
 
         .input-label {
@@ -208,7 +313,6 @@
                 font-weight: 600;
                 line-height: 20px;
                 color: #006bff;
-                margin: 0 0 10px 0;
             }
 
             .narx {
