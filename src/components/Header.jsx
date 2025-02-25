@@ -4,8 +4,10 @@ import "@/styles/main.scss";
 import ModalWrapper from "./ModalWrapper";
 import InputPhone from "./InputPhone/InputPhone";
 import { UseStateValue } from "@/context";
+import { useTranslation } from "react-i18next";
 
 function Header({ setSearch, setModal, modal }) {
+  const { t, i18n } = useTranslation();
 
   const location = useLocation();
   const [icon, setIcon] = useState("/assets/icons/tracker.svg");
@@ -26,7 +28,10 @@ function Header({ setSearch, setModal, modal }) {
     setIcon(location.pathname === "/tracking" ? "/assets/icons/tracker2.svg" : "/assets/icons/tracker.svg");
   }, [location.pathname]);
 
-  const toggleLanguage = () => setLanguage((prev) => (prev === "ru" ? "uz" : "ru"));
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "ru" ? "uz" : "ru";
+    i18n.changeLanguage(newLang);
+  };
   return (
     <header>
       <div className="container">
@@ -45,16 +50,16 @@ function Header({ setSearch, setModal, modal }) {
                 <span></span>
                 <span></span>
               </div>
-              Bo'limlar
+              {t("header.button-text")}
             </button>
           </Link>
           <div className="search">
             <input
               type="text"
-              placeholder="Qidirish..."
+              placeholder={t('header.search')}
               onChange={(e) => setSearch(e.target.value)}
             />
-            <button>Qidirish</button>
+            <button>{t('header.input-btn')}</button>
           </div>
         </div>
         <NavLink to={"/comparison"} className="btn">
@@ -72,7 +77,7 @@ function Header({ setSearch, setModal, modal }) {
                 d="M9.13152 1.30997C9.13152 1.89218 9.31813 2.28032 9.75356 2.60377L10.189 2.79784C8.50949 2.79784 7.0166 3.0566 5.71033 3.76819C3.96863 4.60916 3.96863 3.83288 2.91117 3.83288C2.35133 3.83288 1.7915 4.93261 2.72456 5.45013C2.97337 5.57951 3.471 5.77358 3.78202 5.77358C2.91117 7.52022 2.04032 9.33154 1.16947 11.0782C0.982856 11.0782 0.734042 11.0135 0.609635 11.1429C0.236413 11.4663 0.920652 12.372 1.10726 12.6307L1.7915 13.1482C3.34659 14.1186 6.20795 14.1833 7.57643 12.8248C7.94965 12.5013 8.44728 11.9191 8.44728 11.2722C8.44728 11.0135 7.94965 11.0782 7.82525 11.0782C7.76304 10.9488 7.57643 10.5606 7.51423 10.4313C6.76779 9.00809 5.83473 7.39084 5.2749 5.96765C5.15049 5.70889 5.2127 5.83827 5.71033 5.70889C6.82999 5.45013 8.07406 4.73854 9.13152 4.73854V15.2183C8.38508 15.2183 7.82525 15.8652 7.82525 16.6415H6.27016C5.77253 16.6415 5.15049 17.2237 5.15049 18H10.5H15.8495C15.8495 17.2237 15.2275 16.6415 14.7298 16.6415H13.1748C13.1748 15.8652 12.6149 15.2183 11.8685 15.2183V4.73854C12.9259 4.73854 14.17 5.45013 15.2897 5.70889C15.7873 5.83827 15.8495 5.70889 15.7251 5.96765C15.1031 7.39084 14.2322 9.00809 13.4858 10.4313C13.4236 10.5606 13.237 10.9488 13.1748 11.0782C13.0503 11.0782 12.4905 11.0135 12.4905 11.2722C12.4905 11.9191 13.0503 12.5013 13.4236 12.8248C14.7298 14.1833 17.6534 14.1186 19.2085 13.1482L19.8927 12.6307C20.0793 12.372 20.7636 11.4663 20.3904 11.1429C20.266 11.0135 20.0171 11.0782 19.8305 11.0782C18.9597 9.33154 18.0888 7.52022 17.218 5.77358C17.529 5.77358 18.0266 5.57951 18.2132 5.45013C19.2085 4.93261 18.5865 3.83288 18.0266 3.83288C17.0314 3.83288 17.0314 4.60916 15.2897 3.76819C13.9834 3.0566 12.4905 2.79784 10.811 2.79784L11.1842 2.60377C11.6819 2.28032 11.8685 1.89218 11.8685 1.30997C11.8685 -0.436658 9.13152 -0.436658 9.13152 1.30997Z"
               />
             </svg>
-            Taqqoslash
+            {t('header.Comparison')}
           </button>
         </NavLink>
         <NavLink to={"/payment"} className="btn">
@@ -86,7 +91,7 @@ function Header({ setSearch, setModal, modal }) {
               <circle cx="44.78" cy="101.76" r="12.21" />
               <circle cx="150.6" cy="101.76" r="12.21" />
             </svg>
-            To'lov
+            {t('header.Payment')}
           </button>
         </NavLink>
         <NavLink
@@ -101,7 +106,7 @@ function Header({ setSearch, setModal, modal }) {
         >
           <button>
             <img src={icon} alt="Tracking Icon" />
-            Trek
+            {t('header.Track')}
           </button>
         </NavLink>
         <NavLink to={"/basket"} className="btn">
@@ -118,7 +123,7 @@ function Header({ setSearch, setModal, modal }) {
               <circle cx="139.68" cy="180.76" r="16.43" />
             </svg>
             <span className="count">{cartCount}</span>
-            Savatcha
+            {t('header.Cart')}
           </button>
         </NavLink>
         <NavLink to={"/favorite"} className="btn">
@@ -134,13 +139,13 @@ function Header({ setSearch, setModal, modal }) {
               />
             </svg>
             <span className="count">{favoriteCount}</span>
-            Sevimlilar
+            {t('header.Favorites')}
           </button>
         </NavLink>
         <Link className="btn">
           <button className="btn" onClick={toggleLanguage}>
-            <img src={`/assets/icons/language-${language}.svg`} alt="language" />
-            {language === "ru" ? "Русский" : "O'zbekcha"}
+            <img src={`/assets/icons/language-${i18n.language === "ru" ? "uz" : "ru"}.svg`} alt="language" />
+            {t("header.Language")}
           </button>
         </Link>
         <div className="btn">
@@ -159,19 +164,19 @@ function Header({ setSearch, setModal, modal }) {
                 d="M60.47 94.06c-33.37,0.03 -60.44,27.09 -60.47,60.47 0,3.71 3.01,6.72 6.72,6.72 3.71,0 6.72,-3.01 6.72,-6.72 0,-25.97 21.06,-47.03 47.03,-47.03 25.97,0 47.03,21.06 47.03,47.03 0,3.71 3.01,6.72 6.72,6.72 3.71,0 6.72,-3.01 6.72,-6.72 -0.03,-33.37 -27.09,-60.44 -60.47,-60.47l0 0z"
               />
             </svg>
-            Kirish
+            {t('header.Login')}
           </button>
         </div>
         {modal && (
           <ModalWrapper onClose={() => setModal(false)} >
             <div className="login-modal">
               <div className="login-register">
-                <h1>Kirish yoki shaxsiy kabinet yaratish</h1>
+                <h1>{t('header.Modal.modal-text')}</h1>
                 <InputPhone />
-                <button className="login-btn">Faollashtirish kodini oling</button>
+                <button className="login-btn">{t('header.Modal.modal-btn')}</button>
                 <div className="login-line">
                   <span></span>
-                  <p>Yoki</p>
+                  <p>{t('header.Modal.modal-p')}</p>
                   <span></span>
                 </div>
                 <div className="login-social">
@@ -183,29 +188,29 @@ function Header({ setSearch, setModal, modal }) {
                 <div className="login-text-card">
                   <img src="/assets/icons/market.svg" alt="" />
                   <div className="login-text-card-text">
-                    <h2>Endi bozorga borishga hojat yo'q</h2>
-                    <p>Bizda qulay narxlar va uyga yetkazib berish mavjud</p>
+                    <h2>{t('header.Modal.modal-card1-h')}</h2>
+                    <p>{t('header.Modal.modal-card1-p')}</p>
                   </div>
                 </div>
                 <div className="login-text-card">
                   <img src="/assets/icons/fast-delivery.svg" alt="" />
                   <div className="login-text-card-text">
-                    <h2>Tez yetkazib berish</h2>
-                    <p>Bizning xizmatimiz sizni ajablantiradi</p>
+                    <h2>{t('header.Modal.modal-card2-h')}</h2>
+                    <p>{t('header.Modal.modal-card2-p')}</p>
                   </div>
                 </div>
                 <div className="login-text-card">
                   <img src="/assets/icons/return.svg" alt="" />
                   <div className="login-text-card-text">
-                    <h2>Siz uchun qulayliklar</h2>
-                    <p>Nosozlik yuzaga kelganda tez rasmiylashtirish va qaytarish kafolati</p>
+                    <h2>{t('header.Modal.modal-card3-h')}</h2>
+                    <p>{t('header.Modal.modal-card3-p')}</p>
                   </div>
                 </div>
                 <div className="login-text-card">
                   <img src="/assets/icons/card.svg" alt="" />
                   <div className="login-text-card-text">
-                    <h2>Bo'lib to'lash</h2>
-                    <p>Oldindan to'lov yo'q</p>
+                    <h2>{t('header.Modal.modal-card4-h')}</h2>
+                    <p>{t('header.Modal.modal-card4-p')}</p>
                   </div>
                 </div>
               </div>
