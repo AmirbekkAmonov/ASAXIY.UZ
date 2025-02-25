@@ -4,9 +4,11 @@ import Header from "@/components/Header";
 import "@/styles/main.scss";
 import { Link } from "react-router-dom";
 import { UseStateValue } from "@/context";
+import { useTranslation } from "react-i18next";
 
 function Favorite() {
   const { favorites, toggleFavorite } = UseStateValue();
+  const {t, i18n} = useTranslation()
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,17 +20,17 @@ function Favorite() {
       <section className="favorite">
         <div className="container">
           <div className='favorite-Links'>
-            <Link to='/'>Bosh sahifa</Link>
+            <Link to='/'>{t('Home_page')}</Link>
             <span>&gt;</span>
-            <p>Sevimlilar</p>
+            <p>{t('favorite.Favorite')}</p>
           </div>
 
           {favorites.length === 0 ? (
             <div className="favorite-empty">
               <img src="/assets/images/heart-bubble.svg" alt="" />
-              <p>Sevimli mahsulotlar yo'q</p>
-              <span>Mahsulotdagi ❤️ belgisi bilan qo'shing</span>
-              <Link to='/' className="btn">Mahsulot qo'shish</Link>
+              <p>{t('favorite.Not_available')}</p>
+              <span>{t('favorite.Span')}</span>
+              <Link to='/' className="btn">{t('Add_product')}</Link>
             </div>
           ) : (
             <div className="favorite-content">
@@ -41,7 +43,7 @@ function Favorite() {
                   />
                 ))}
               </div>
-              <Link to='/' className="btn"> Mahsulot qo'shish</Link>
+              <Link to='/' className="btn">{t('Add_product')}</Link>
             </div>
           )}
         </div>

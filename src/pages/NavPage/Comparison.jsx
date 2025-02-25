@@ -3,10 +3,12 @@ import ProductCard from "@/components/ProductCard";
 import "@/styles/main.scss";
 import { Link } from "react-router-dom";
 import { UseStateValue } from "@/context";
+import { useTranslation } from "react-i18next";
 
 function Comparison() {
   const { comparison, toggleComparison } = UseStateValue();
   const [localComparison, setLocalComparison] = useState([]);
+  const {t, i18n} = useTranslation()
 
   useEffect(() => {
     setLocalComparison(comparison);
@@ -19,17 +21,17 @@ function Comparison() {
     <section className="comparison">
       <div className="container">
         <div className="comparison-Links">
-          <Link to="/">Bosh sahifa</Link>
+          <Link to="/">{t('Home_page')}</Link>
           <span>&gt;</span>
-          <p>Taqqoslash</p>
+          <p>{t('comparison.Comparison')}</p>
         </div>
 
         {localComparison.length === 0 ? (
           <div className="comparison-empty">
             <img src="/assets/images/campare_not_page.webp" alt="Bo‘sh sahifa" />
-            <p>Hozirda sizda mahsulotlar mavjud emas.</p>
+            <p>{t('comparison.Not_available')}</p>
             <Link to="/" className="btn">
-              Mahsulot qo'shish
+              {t('Add_product')}
             </Link>
           </div>
         ) : (
@@ -44,7 +46,7 @@ function Comparison() {
               ))}
             </div>
             <Link to="/" className="btn">
-              Mahsulot qo'shish
+            {t('Add_product')}
             </Link>
           </div>
         )}

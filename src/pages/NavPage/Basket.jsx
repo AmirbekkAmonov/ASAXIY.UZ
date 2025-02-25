@@ -3,9 +3,11 @@ import '@/styles/main.scss';
 import { Link } from 'react-router-dom';
 import { UseStateValue } from '@/context';
 import ProductCard from '@/components/ProductCard';
+import { useTranslation } from 'react-i18next';
 
 function Basket() {
   const { cart, removeFromCart } = UseStateValue();
+  const {t, i18n} = useTranslation()
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -15,17 +17,17 @@ function Basket() {
     <section className='basket'>
       <div className='container'>
         <div className='basket-Links'>
-          <Link to='/'>Bosh sahifa</Link>
+          <Link to='/'>{t('Home_page')}</Link>
           <span>&gt;</span>
-          <p>Savatcha</p>
+          <p>{t('basket.Basket')}</p>
         </div>
 
         {cart.length === 0 ? (
           <div className="basket-empty">
             <img src="/assets/images/basket_no_page.webp" alt="" />
-            <p>Savatda hozircha mahsulot yo'q.</p>
-            <span>Bosh sahifadagi termalardan boshlang yoki kerakli mahsulotni qidiruv orqali toping.</span>
-            <Link to='/' className="btn">Asosiy menyu</Link>
+            <p>{t('basket.Not_available')}</p>
+            <span>{t('basket.Span')}</span>
+            <Link to='/' className="btn">{t('basket.Span2')}</Link>
           </div>
         ) : (
           <div className='basket-content'>
@@ -36,23 +38,23 @@ function Basket() {
             </div>
             <div className='basket-total'>
               <div className='basket-total-img'>
-                <p className='p'>Savatdagi mahsulotlar soni: {cart.length} </p>
+                <p className='p'>{t('basket.Number',{ count: cart.length })} </p>
                 <div className="tooltip-container">
                   <img src="/assets/icons/discount_cart.svg" alt="" />
                   <div className="tooltip">
-                    <p>5ta kitob uchun 5% chegirma</p>
-                    <p>10ta kitob uchun 10% chegirma</p>
-                    <p>20ta kitob uchun 12% chegirma</p>
-                    <p>50ta kitob uchun 15% chegirma</p>
+                    <p>{t('basket.Discount')}</p>
+                    <p>{t('basket.Discount2')}</p>
+                    <p>{t('basket.Discount3')}</p>
+                    <p>{t('basket.Discount4')}</p>
                   </div>
                 </div>
               </div>
               <div className='basket-total-price'>
-                <p>Umumiy qiymat:</p>
-                <span >{cart.reduce((total, item) => total + item.price * item.quantity * 13000, 0).toLocaleString()} so'm</span>
+                <p>{t('basket.Price')}</p>
+                <span >{cart.reduce((total, item) => total + item.price * item.quantity * 13000, 0).toLocaleString()} {t('sum')}</span>
               </div>
               <span className='span'></span>
-              <Link to='/order' className='btn'>Buyurtma berish</Link>
+              <Link to='/order' className='btn'>{t('basket.Buy')}</Link>
             </div>
           </div>
         )}

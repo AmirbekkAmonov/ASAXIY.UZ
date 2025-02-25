@@ -7,14 +7,15 @@ import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import { faStar as faStarRegular } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { UseStateValue } from "@/context";
+import { useTranslation } from "react-i18next";
 
 function ProductCard({ product, isBasket, isOrder }) {
   const { favorites, toggleFavorite, comparison, toggleComparison, cart, toggleCart, updateCartQuantity, removeFromCart } = UseStateValue();
   const [imageLoaded, setImageLoaded] = useState(false);
-
   const isLiked = favorites.some((fav) => fav.id === product.id);
   const isCompared = comparison.some((comp) => comp.id === product.id);
   const isInCart = cart.some((item) => item.id === product.id);
+  const {t, i18n} = useTranslation();
 
   return (
     <div className={`product-card ${isBasket ? "basket-card" : ""}`}>
@@ -49,14 +50,14 @@ function ProductCard({ product, isBasket, isOrder }) {
               <div className="basket-text2">
                 <div className="price">
                   <span className="old">
-                    {(product.price * 1.2 * 13000).toLocaleString()} so'm
+                    {(product.price * 1.2 * 13000).toLocaleString()} {t('sum')}
                   </span>
                   <span className="new">
-                    {(product.price * 13000).toLocaleString()} so'm
+                    {(product.price * 13000).toLocaleString()} {t('sum')}
                   </span>
                 </div>
                 <p className="to-pay">
-                  {((product.price / 12) * 13000).toFixed(0)} so'm x 12 oy
+                  {((product.price / 12) * 13000).toFixed(0)} {t('sum')} x 12 {t('Month')}
                 </p>
               </div>
               <div className="basket-icon">
@@ -93,9 +94,9 @@ function ProductCard({ product, isBasket, isOrder }) {
           <div className="order-text">
             <b>{product.title}</b>
             <div className="order-text2">
-              <span className="order-quantity">{product.quantity} Dona</span>
+              <span className="order-quantity">{product.quantity} {t('order.Piece')}</span>
               <p className="order-price">
-                {(product.price * 13000).toLocaleString()} so'm
+                {(product.price * 13000).toLocaleString()} {t('sum')}
               </p>
             </div>
             <div className="order-icon" onClick={() => removeFromCart(product.id)}>
@@ -104,7 +105,7 @@ function ProductCard({ product, isBasket, isOrder }) {
                 style={{ width: "20px", height: "20px", cursor: "pointer", }}
                 className="delete-icon"
               />
-              <p>O'chirish</p>
+              <p>{t('order.Delete')}</p>
             </div>
           </div>
         </div>
@@ -162,22 +163,22 @@ function ProductCard({ product, isBasket, isOrder }) {
                     />
                   ))}
                 </div>
-                <span className="comments">{product.reviews?.length || 0} ta sharh</span>
+                <span className="comments">{product.reviews?.length || 0} {t('productCard.Comment')}</span>
               </div>
               <div className="price">
                 <span className="old">
-                  {(product.price * 1.2 * 13000).toLocaleString()} so'm
+                  {(product.price * 1.2 * 13000).toLocaleString()} {t('sum')}
                 </span>
                 <span className="new">
-                  {(product.price * 13000).toLocaleString()} so'm
+                  {(product.price * 13000).toLocaleString()} {t('sum')}
                 </span>
               </div>
               <button className="to-pay">
-                {((product.price / 12) * 13000).toFixed(0)} so'm x 12 oy
+                {((product.price / 12) * 13000).toFixed(0)} {t('sum')} x 12 {t('Month')}
               </button>
             </Link>
             <div className="product-card-btn">
-              <button className="buy">Hoziroq harid qilish</button>
+              <button className="buy">{t('productCard.Buy_now')}</button>
               <button
                 className={`add`}
                 onClick={() => toggleCart(product)}

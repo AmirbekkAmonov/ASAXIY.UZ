@@ -10,11 +10,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import API from "@/API";
+import { useTranslation } from "react-i18next";
 function Product({ search }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ name: "all", price: "all", rating: "all" });
+  const {t, i18n} = useTranslation()
 
   useEffect(() => {
     API.get('/products')
@@ -73,9 +75,9 @@ function Product({ search }) {
       {/* CORUSEL */}
       <div className="product-title">
         <Link to={"/empty"} className="h2" style={{ marginLeft: "10px" }}>
-          Super narx
+          {t('product.SuperPrice')}
         </Link>
-        <Link to={"/empty"}>Barcha mahsulotlar</Link>
+        <Link to={"/empty"}>{t('product.AllProducts')}</Link>
       </div>
       <div className="product-grid product-carousel">
         <Swiper
@@ -109,9 +111,9 @@ function Product({ search }) {
       {/* BESTSELLER */}
       <div className="product-title">
         <Link to={"/empty"} className="h2">
-          BESTSELLER
+          {t('product.BESTSELLER')}
         </Link>
-        <Link to={"/empty"}>Barcha mahsulotlar</Link>
+        <Link to={"/empty"}>{t('product.AllProducts')}</Link>
       </div>
       <div className="product-grid">
         {loading ? (
@@ -120,7 +122,7 @@ function Product({ search }) {
           bestsellerProducts.map((product) => <ProductCard key={product.id} product={product} />)
         ) : (
           <div className="no-results">
-            <h3>Mahsulot topilmadi!</h3>
+            <h3>{t('product.found')}</h3>
           </div>
         )}
       </div>
@@ -128,9 +130,9 @@ function Product({ search }) {
       {/* XAZNA */}
       <div className="product-title">
         <Link to={"/empty"} className="h2">
-          Xazna 0-0-6 (Faqat oziq-ovqat)
+          {t('product.food')}
         </Link>
-        <Link to={"/empty"}>Barcha mahsulotlar</Link>
+        <Link to={"/empty"}>{t('product.AllProducts')}</Link>
       </div>
       <div className="product-grid">
         {loading
@@ -141,9 +143,9 @@ function Product({ search }) {
       {/* OMMABOP TOVARLAR */}
       <div className="product-title">
         <Link to={"/empty"} className="h2">
-          Ommabop tovarlar
+          {t('product.Popular')}
         </Link>
-        <Link to={"/empty"}>Barcha mahsulotlar</Link>
+        <Link to={"/empty"}>{t('product.AllProducts')}</Link>
       </div>
       <div className="product-grid">
         {loading

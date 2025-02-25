@@ -14,26 +14,28 @@ import {
   faInstagram,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
+  const { t, i18n } = useTranslation();
   return (
     <footer>
       <div className="container">
         <div className="footer-content">
           <div className="links">
-            <b>Ma'lumotlar</b>
-            <Link>Ko'p so'raladigan savollar</Link>
-            <Link>Yangiliklar</Link>
-            <Link>Blog</Link>
-            <Link>Bizning brendlarimiz</Link>
-            <Link>Asaxiydagi karyerasi</Link>
-            <Link>Muddatli to'lov ofertasi</Link>
-            <Link>Ommaviy oferta</Link>
-            <Link>Biz haqimizda</Link>
-            <Link>Sayt xaritasi</Link>
+            <b>{t("footer.Information")}</b>
+            <Link>{t('footer.Questions')}</Link>
+            <Link>{t('footer.News')}</Link>
+            <Link>{t('footer.Blog')}</Link>
+            <Link>{t('footer.Brands')}</Link>
+            <Link>{t('footer.Career')}</Link>
+            <Link>{t('footer.Ofer')}</Link>
+            <Link>{t('footer.PublicOffer')}</Link>
+            <Link>{t('footer.About_Us')}</Link>
+            <Link>{t('footer.Sitemap')}</Link>
           </div>
           <div className="links">
-            <b>Biz bilan aloqa</b>
+            <b>{t('footer.Contact_us')}</b>
             <a href="tel:+998712000105">
               <FontAwesomeIcon icon={faPhone} />
               +998 71 200 01 05
@@ -51,15 +53,15 @@ function Footer() {
               href="https://www.google.com/maps/place/41%C2%B017'03.4%22N+69%C2%B013'28.3%22E/@41.284272,69.22453,17z/data=!3m1!4b1!4m4!3m3!8m2!3d41.284272!4d69.22453?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoJLDEwMjExNDUzSAFQAw%3D%3D"
             >
               <FontAwesomeIcon icon={faLocationDot} />
-              Chilonzor ko'chasi, 45/2, Toshkent
+              {t('footer.Address')}
             </a>
-            <b className="sodiqlik">Sodiqlik dasturlari</b>
-            <Link>"El-yurt ishonchi" statusi</Link>
+            <b className="sodiqlik">{t('footer.Loyalty')}</b>
+            <Link>{t('footer.Status')}</Link>
             <Link>«Asaxiy Plus»</Link>
-            <Link>«Asaxiy Plus» ofertasi</Link>
+            <Link>{t('footer.Offer')}</Link>
           </div>
           <div className="links">
-            <b>Yetkazib berish va do'konlar</b>
+            <b>{t('footer.Delivery')}</b>
             <a
               href="https://www.google.com/maps/d/u/0/viewer?mid=1R5cL_79kiW9_CaeJVvCfswbKeU-hetc&ll=40.55956848590127%2C66.87988510000002&z=7"
               target="_blank"
@@ -67,7 +69,7 @@ function Footer() {
               className="a-btn"
             >
               <img src="/assets/icons/store.svg" alt="" />
-              Bizning do'konlar
+              {t('footer.Our_stores')}
               <img src="/assets/icons/iconleft.svg" alt="" />
             </a>
             <a
@@ -77,7 +79,7 @@ function Footer() {
               className="a-btn"
             >
               <img src="/assets/icons/delivery-point.svg" alt="" />
-              Olib ketish punktlari
+              {t('footer.Pick-up')}
               <img src="/assets/icons/iconleft.svg" alt="" />
             </a>
             <a
@@ -87,12 +89,12 @@ function Footer() {
               className="a-btn"
             >
               <img src="/assets/icons/delivery-footer.svg" alt="" />
-              Yetkazib berish
+              {t('footer.Deliverys')}
               <img src="/assets/icons/iconleft.svg" alt="" />
             </a>
           </div>
           <div className="links">
-            <b>To'lov turlari</b>
+            <b>{t('footer.Payment_types')}</b>
             <div className="payments">
               <span>
                 <img src="/assets/images/uzum.svg" alt="" />
@@ -117,7 +119,7 @@ function Footer() {
                 <img src="/assets/images/uzcard.svg" alt="" />
               </span>
             </div>
-            <b className="sodiqlik">Biz ijtimoiy tarmoqlarda</b>
+            <b className="sodiqlik">{t('footer.Media')}</b>
             <div className="icons">
               <a href="https://www.facebook.com/asaxiyshop/" target="_blank">
                 <FontAwesomeIcon icon={faFacebook} style={{ fontSize: "25px" }} />
@@ -140,11 +142,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="footer-bottom">
-          2015 - 2025 Internet-do'kon asaxiy.uz: Maishiy texnikalar va
-          boshqalar.Mahsulotni yetkazib berish barcha viloyatlarda amalga
-          oshiriladi. Barcha huquqlar himoyalangan.
-        </div>
+        <div className="footer-bottom"> {t('footer.Footer_bottom')} </div>
       </div>
     </footer>
   );

@@ -11,7 +11,6 @@ function Header({ setSearch, setModal, modal }) {
 
   const location = useLocation();
   const [icon, setIcon] = useState("/assets/icons/tracker.svg");
-  const [language, setLanguage] = useState("ru");
   const { favorites, cart } = UseStateValue();
   const [favoriteCount, setFavoriteCount] = useState(favorites.length);
   const [cartCount, setCartCount] = useState(0);
